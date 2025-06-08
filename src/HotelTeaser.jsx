@@ -11,7 +11,7 @@ function HotelTeaser({ name, price, description, imageURL }) {
         />
       </div>
       <div className="p-4">
-        <div className="flex items-center mb-2">
+        <div className="flex items-center mb-2 flex-wrap justify-between">
           <h5 className="font-bold text-lg mr-2">{name}</h5>
           <span className="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mr-2">
             Available

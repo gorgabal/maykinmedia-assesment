@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import HotelTeaser from "./HotelTeaser";
+import ReactPaginate from "react-paginate";
 
 function HotelOverview() {
   const [hotels, setHotels] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0); // react-paginate uses 0-based index
+  const hotelsPerPage = 6;
 
   useEffect(() => {
     const loadHotels = async () => {
@@ -22,12 +25,8 @@ function HotelOverview() {
 
         const loadedHotels = await Promise.all(hotelPromises);
 
-        console.log("loadedHotels: ", loadedHotels);
-
-        // Filter out any failed loads and take first 6
+        // Filter out any failed loads
         const validHotels = loadedHotels.filter((hotel) => hotel !== null);
-
-        console.log(validHotels);
         setHotels(validHotels);
       } catch (error) {
         console.error("Error loading hotels:", error);
@@ -37,21 +36,47 @@ function HotelOverview() {
     loadHotels();
   }, []);
 
-  //TODO: make sure all HotelInfo is present in the teaser, then start styling.
+  const pageCount = Math.ceil(hotels.length / hotelsPerPage);
+  const offset = currentPage * hotelsPerPage;
+  const currentHotels = hotels.slice(offset, offset + hotelsPerPage);
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
+
   return (
     <>
       <h1 className="bg-black text-gray-500 px-4 py-2 mb-4 font-medium">Hotel Overview</h1>
-      <div className="flex flex-wrap gap-8 justify-center">
-        {hotels.map((hotel, index) => (
+      <div className="flex flex-wrap gap-8 justify-center max-w-7xl mx-auto my-0">
+        {currentHotels.map((hotel, index) => (
           <HotelTeaser
-            key={index}
+            key={hotel.HotelInfo.HotelID || index}
             HotelID={hotel.HotelInfo.HotelID}
             name={hotel.HotelInfo.Name}
             price={hotel.HotelInfo.Price}
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            imageURL={hotel.HotelInfo.ImgURL}
-          />
+              imageURL={hotel.HotelInfo.ImgURL}
+            />
         ))}
+      </div>
+
+      <div className="flex justify-center mt-6">
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={2}
+          onPageChange={handlePageClick}
+          containerClassName={"flex space-x-2"}
+          pageClassName={"px-3 py-1 bg-white rounded text-blue-500 border border-gray-500"}
+          activeClassName={"bg-gray-200 text-gray-700"}
+          previousClassName={"px-3 py-1 bg-white rounded text-blue-500 border border-gray-500"}
+          nextClassName={"px-3 py-1 bg-white rounded text-blue-500 border border-gray-500"}
+          disabledClassName={"opacity-50"}
+          forcePage={currentPage}
+        />
       </div>
     </>
   );

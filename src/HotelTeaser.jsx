@@ -1,19 +1,29 @@
-import { useState } from 'react'
+import React from "react";
 
-function HotelTeaser({name, avilability: availability, price, description, imageURL}) {
-  const [hotels, setHotels] = useState([])
-
-  //TODO: create hotel teaser component, this is a placeholder for the hotel teaser component
+function HotelTeaser({ name, price, description, imageURL }) {
   return (
-    <>
-        <h3>Hotel Teaser</h3>
-        <p>Name: {name}</p>
-        <p>Availability: {availability}</p>
-        <p>Price: {price}</p>
-        <p>Description: {description}</p>
-        <img src={imageURL} alt={name} />
-    </>
-  )
+    <div className="max-w-xs rounded-lg overflow-hidden shadow-lg bg-white">
+      <div className="bg-gray-300 h-32 flex items-center justify-center">
+        <img
+          src={imageURL || "https://placehold.co/350x150"}
+          alt={name}
+          className="object-cover w-full h-32"
+        />
+      </div>
+      <div className="p-4">
+        <div className="flex items-center mb-2">
+          <h5 className="font-bold text-lg mr-2">{name}</h5>
+          <span className="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mr-2">
+            Available
+          </span>
+          <span className="bg-cyan-500 text-white text-xs font-semibold px-2 py-1 rounded">
+            EUR {price}
+          </span>
+        </div>
+        <p className="text-gray-700 text-sm">{description}</p>
+      </div>
+    </div>
+  );
 }
 
-export default HotelTeaser
+export default HotelTeaser;

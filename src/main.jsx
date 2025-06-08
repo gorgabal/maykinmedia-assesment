@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import HotelOverview from './HotelOverview.jsx'
+import './index.css'
 
 //TODO: create hotel overview page
 //TODO: add paging to hotel overview page

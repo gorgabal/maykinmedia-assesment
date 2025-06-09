@@ -1,11 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HotelOverview from './HotelOverview.jsx'
+import HotelDetail from './HotelDetail.jsx'
 import './index.css'
 
-//TODO: create hotel overview page
-//TODO: add paging to hotel overview page
-//TODO: create hotel details page
+//DONE: create hotel overview page
+//DONE: add paging to hotel overview page
+//DONE: create hotel details page
 //TODO: add tests
 //TODO: add documentation
 
@@ -16,6 +18,11 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <HotelOverview />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HotelOverview />} />
+        <Route path="/detail/:hotelId" element={<HotelDetail />} />
+      </Routes>
+    </BrowserRouter>
   </StrictMode>,
 )

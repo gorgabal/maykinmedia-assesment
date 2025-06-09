@@ -46,7 +46,7 @@ function HotelOverview() {
 
   return (
     <>
-      <h1 className="bg-black text-gray-500 px-4 py-2 mb-4 font-medium">Hotel Overview</h1>
+      <h1 className="bg-black text-gray-500 px-4 py-2 mb-4 font-medium">Hotel Assesment</h1>
       <div className="flex flex-wrap gap-8 justify-center max-w-7xl mx-auto my-0">
         {currentHotels.map((hotel, index) => (
           <HotelTeaser
@@ -55,8 +55,9 @@ function HotelOverview() {
             name={hotel.HotelInfo.Name}
             price={hotel.HotelInfo.Price}
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              imageURL={hotel.HotelInfo.ImgURL}
-            />
+            imageURL={hotel.HotelInfo.ImgURL}
+            url={`/detail/${hotel.HotelInfo.HotelID}`}
+          />
         ))}
       </div>
 

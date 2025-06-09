@@ -9,7 +9,7 @@ import './index.css'
 //DONE: add paging to hotel overview page
 //DONE: create hotel details page
 //TODO: add tests
-//TODO: add documentation
+//DONE: add documentation
 
 //OPTIONAL: 
 //TODO: filter on hotel overview

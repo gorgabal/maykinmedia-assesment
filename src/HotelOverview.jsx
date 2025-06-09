@@ -46,7 +46,7 @@ function HotelOverview() {
 
   return (
     <>
-      <h1 className="bg-black text-gray-500 px-4 py-2 mb-4 font-medium">Hotel Assesment</h1>
+      <h1 className="bg-black text-gray-500 px-4 py-2 mb-4 font-medium">Hotel Overview</h1>
       <div className="flex flex-wrap gap-8 justify-center max-w-7xl mx-auto my-0">
         {currentHotels.map((hotel, index) => (
           <HotelTeaser
@@ -61,7 +61,7 @@ function HotelOverview() {
         ))}
       </div>
 
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-6 mb-6">
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}

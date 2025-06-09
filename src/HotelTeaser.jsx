@@ -17,12 +17,14 @@ function HotelTeaser({ name, price, description, imageURL, url }) {
         <div className="p-4 flex flex-col justify-between">
           <div className="flex items-center mb-2 flex-wrap justify-between">
             <h5 className="font-bold text-lg mr-2">{name}</h5>
-            <span className="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mr-2">
-              Available
-            </span>
-            <span className="bg-cyan-500 text-white text-xs font-semibold px-2 py-1 rounded">
-              EUR {price}
-            </span>
+            <div className="flex justify-between w-full mt-2">
+              <span className="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mr-2">
+                Available
+              </span>
+              <span className="bg-cyan-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                EUR {price}
+              </span>
+            </div>
           </div>
           <p className="text-gray-700 text-sm">{description}</p>
         </div>

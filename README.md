@@ -1,3 +1,7 @@
+THIS IS NOT A REAL PROJECT. 
+
+This is just a assignment for a job application.
+
 # Hotel Assessment
 
 A React-based hotel booking application that displays hotel listings and detailed information about each hotel.

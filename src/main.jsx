@@ -8,7 +8,7 @@ import './index.css'
 //DONE: create hotel overview page
 //DONE: add paging to hotel overview page
 //DONE: create hotel details page
-//TODO: add tests
+//DONE: add tests
 //DONE: add documentation
 
 //OPTIONAL: 

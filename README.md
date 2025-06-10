@@ -10,8 +10,7 @@ A React-based hotel booking application that displays hotel listings and detaile
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm, yarn, or pnpm
-
+- npm
 ### Installation
 
 1. Clone the repository:
@@ -41,6 +40,16 @@ npm run dev
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
+- `npm test` - Run tests in watch mode
+
+### Testing
+
+The project uses Vitest and React Testing Library for testing. Tests are located in the `tests/` directory.
+
+To run tests:
+```bash
+npm test
+```
 
 ### Technologies Used
 

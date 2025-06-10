@@ -5,7 +5,6 @@ import RoomTypeCard from './RoomTypeCards';
 function HotelDetail() {
     const { hotelId } = useParams();
     const [hotel, setHotel] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadHotel = async () => {
@@ -14,17 +13,11 @@ function HotelDetail() {
                 setHotel(hotelData.default);
             } catch (error) {
                 console.error('Error loading hotel:', error);
-            } finally {
-                setLoading(false);
             }
         };
 
         loadHotel();
     }, [hotelId]);
-
-    if (loading) {
-        return <div className="flex justify-center items-center h-screen">Loading...</div>;
-    }
 
     if (!hotel) {
         return <div className="flex justify-center items-center h-screen">Hotel not found</div>;
@@ -37,17 +30,17 @@ function HotelDetail() {
     const roomTypes = hotel.RoomTypes || [
         {
             name: 'Room type A',
-            description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam.',
             price: 'X',
         },
         {
-            name: 'Room type B',
-            description: 'This card has supporting text below as a natural lead-in to additional content.',
+            name: 'Room type B', 
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.',
             price: 'Y',
         },
         {
             name: 'Room type C',
-            description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
             price: 'Z',
         },
     ];

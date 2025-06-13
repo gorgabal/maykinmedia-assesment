@@ -15,7 +15,7 @@ A React-based hotel booking application that displays hotel listings and detaile
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/gorgabal/maykinmedia-assesment.git
 cd maykinmedia-assesment
 ```
 

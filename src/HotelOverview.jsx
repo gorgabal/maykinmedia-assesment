@@ -5,6 +5,9 @@ import ReactPaginate from "react-paginate";
 function HotelOverview() {
   const [hotels, setHotels] = useState([]);
   const [currentPage, setCurrentPage] = useState(0); // react-paginate uses 0-based index
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [minRating, setMinRating] = useState(0);
   const hotelsPerPage = 6;
 
   useEffect(() => {
@@ -25,8 +28,24 @@ function HotelOverview() {
 
         const loadedHotels = await Promise.all(hotelPromises);
 
-        // Filter out any failed loads
-        const validHotels = loadedHotels.filter((hotel) => hotel !== null);
+        // Filter out any failed loads and add rating info
+        const validHotels = loadedHotels.filter((hotel) => hotel !== null).map(hotel => {
+          const reviewCount = hotel.Reviews ? hotel.Reviews.length : 0;
+          const averageRating = reviewCount > 0 ? (hotel.Reviews.reduce((acc, review) => acc + parseFloat(review.Ratings.Overall), 0) / reviewCount).toFixed(1) : 0;
+          
+          let location = "Unknown";
+          if (hotel.HotelInfo.Address) {
+            const match = hotel.HotelInfo.Address.match(/<span property="v:locality">([^<]+)<\/span>/);
+            if (match && match[1]) {
+              location = match[1];
+            }
+          }
+
+          return { ...hotel, reviewCount, averageRating, location };
+        });
+
+        const uniqueLocations = [...new Set(validHotels.map(h => h.location))].sort();
+        setLocations(uniqueLocations);
         setHotels(validHotels);
       } catch (error) {
         console.error("Error loading hotels:", error);
@@ -36,9 +55,25 @@ function HotelOverview() {
     loadHotels();
   }, []);
 
-  const pageCount = Math.ceil(hotels.length / hotelsPerPage);
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+    setCurrentPage(0); // Reset to first page on filter change
+  };
+
+  const handleRatingChange = (event) => {
+    setMinRating(Number(event.target.value));
+    setCurrentPage(0);
+  };
+
+  const filteredHotels = hotels.filter(hotel => {
+    const matchesLocation = selectedLocation ? hotel.location === selectedLocation : true;
+    const matchesRating = minRating > 0 ? hotel.averageRating >= minRating : true;
+    return matchesLocation && matchesRating;
+  });
+
+  const pageCount = Math.ceil(filteredHotels.length / hotelsPerPage);
   const offset = currentPage * hotelsPerPage;
-  const currentHotels = hotels.slice(offset, offset + hotelsPerPage);
+  const currentHotels = filteredHotels.slice(offset, offset + hotelsPerPage);
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
@@ -47,6 +82,25 @@ function HotelOverview() {
   return (
     <>
       <h1 className="bg-black text-gray-500 px-4 py-2 mb-4 font-medium">Hotel Overview</h1>
+      
+      <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-4 mb-6">
+        <select onChange={handleLocationChange} value={selectedLocation} className="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Filter by Location</option>
+          {locations.map(loc => (
+            <option key={loc} value={loc}>{loc}</option>
+          ))}
+        </select>
+
+        <select onChange={handleRatingChange} value={minRating} className="icon-padding border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="0">Filter by Rating</option>
+          {[1, 2, 3, 4, 5].map(rating => (
+            <option key={rating} value={rating}>
+              {rating} Star{rating > 1 ? 's' : ''} & Up
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="flex flex-wrap gap-8 justify-center max-w-7xl mx-auto my-0">
         {currentHotels.map((hotel, index) => (
           <HotelTeaser
@@ -57,6 +111,8 @@ function HotelOverview() {
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             imageURL={hotel.HotelInfo.ImgURL}
             url={`/detail/${hotel.HotelInfo.HotelID}`}
+            reviewCount={hotel.reviewCount}
+            averageRating={hotel.averageRating}
           />
         ))}
       </div>

@@ -12,9 +12,9 @@ import './index.css'
 //DONE: add documentation
 
 //OPTIONAL: 
-//TODO: filter on hotel overview
+//DONE: filter on hotel overview
 //TODO: reservation form
-//TODO: show reviews for (a) hotel(s). 
+//DONE: show reviews for (a) hotel(s). 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

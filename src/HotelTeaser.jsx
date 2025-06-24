@@ -1,6 +1,6 @@
 import React from "react";
 
-function HotelTeaser({ name, price, description, imageURL, url }) {
+function HotelTeaser({ name, price, description, imageURL, url, reviewCount, averageRating }) {
   return (
     <a 
       href={url} 
@@ -13,11 +13,16 @@ function HotelTeaser({ name, price, description, imageURL, url }) {
             className="object-cover w-full h-32"
           />
         </div>
-        <div className="p-4 flex flex-col justify-between">
-          <div className="flex items-center mb-2 flex-wrap justify-between">
-            <h5 className="font-bold text-lg mr-2">{name}</h5>
-            <div className="flex justify-between w-full mt-2">
-              <span className="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mr-2">
+        <div className="p-4 flex flex-col justify-between flex-grow">
+          <div>
+            <h5 className="font-bold text-lg mb-1">{name}</h5>
+            <div className="flex items-center mb-2">
+              <span className="text-xs mr-1">{averageRating}</span>
+              <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+              <span className="text-xs text-gray-500 ml-1">({reviewCount} reviews)</span>
+            </div>
+            <div className="flex justify-between w-full">
+              <span className="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
                 Available
               </span>
               <span className="bg-cyan-500 text-white text-xs font-semibold px-2 py-1 rounded">
@@ -25,7 +30,7 @@ function HotelTeaser({ name, price, description, imageURL, url }) {
               </span>
             </div>
           </div>
-          <p className="text-gray-700 text-sm">{description}</p>
+          <p className="text-gray-700 text-sm mt-4">{description}</p>
         </div>
       </div>
     </a>

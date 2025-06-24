@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 
 function HotelOverview() {
   const [hotels, setHotels] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0); // react-paginate uses 0-based index
+  const [currentPage, setCurrentPage] = useState(0); 
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [minRating, setMinRating] = useState(0);
@@ -57,7 +57,7 @@ function HotelOverview() {
 
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
-    setCurrentPage(0); // Reset to first page on filter change
+    setCurrentPage(0); 
   };
 
   const handleRatingChange = (event) => {

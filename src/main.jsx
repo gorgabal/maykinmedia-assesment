@@ -5,17 +5,6 @@ import HotelOverview from './HotelOverview.jsx'
 import HotelDetail from './HotelDetail.jsx'
 import './index.css'
 
-//DONE: create hotel overview page
-//DONE: add paging to hotel overview page
-//DONE: create hotel details page
-//DONE: add tests
-//DONE: add documentation
-
-//OPTIONAL: 
-//DONE: filter on hotel overview
-//DONE: reservation form
-//DONE: show reviews for (a) hotel(s). 
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

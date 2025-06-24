@@ -13,7 +13,7 @@ import './index.css'
 
 //OPTIONAL: 
 //DONE: filter on hotel overview
-//TODO: reservation form
+//DONE: reservation form
 //DONE: show reviews for (a) hotel(s). 
 
 createRoot(document.getElementById('root')).render(
